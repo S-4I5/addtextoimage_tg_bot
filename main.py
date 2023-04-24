@@ -31,7 +31,7 @@ async def send_welcome(message: types.Message):
 
 @dp.throttled(anti_flood, rate=1)
 @dp.message_handler(commands=['about'])
-async def send_welcome(message: types.Message):
+async def send_about(message: types.Message):
     await message.answer(f"Author: Полуэктов Яков 3530904/10005\n"
                      f"Source: https://github.com/S-4I5/addtextoimage_tg_bot\n")
 
@@ -47,12 +47,12 @@ async def get_tags(message: types.Message):
                      f"y - x координата текста (DEFAULT: (h-text_h)/2)\n"
                      f"Координаты могут быть заданы формулами вида (w-text_w)/2, где w - ширина изображения, а h - высота\n"
                      f"Теги должны быть заданы в формате tag:value и разделены запятыми\n"
-                     f"Пример: text : I love Telegram!, fontsize : 20, fontcolor : red!")
+                     f"Пример: text : I love Telegram!, fontsize : 20, fontcolor : red")
 
 
 @dp.throttled(anti_flood, rate=1)
 @dp.message_handler(content_types=types.ContentType.PHOTO)
-async def echo(message: Message):
+async def add_text(message: Message):
     random_name = get_random_file_name(10)
     await message.photo[-1].download(f'{random_name}.jpg')
 
