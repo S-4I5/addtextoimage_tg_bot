@@ -23,23 +23,23 @@ async def anti_flood(*args, **kwargs):
 
 @dp.throttled(anti_flood, rate=1)
 @dp.message_handler(commands=['start', 'help'])
-async def send_welcome(msg: types.Message):
-    await msg.answer(f"Привет, {msg.from_user.first_name}!\n"
+async def send_welcome(message: types.Message):
+    await message.answer(f"Привет, {message.from_user.first_name}!\n"
                      f"Отправь фото и задай теги для расположения на нём текста\n"
                      f"Список тегов можно посмотреть командой /tags")
 
 
 @dp.throttled(anti_flood, rate=1)
 @dp.message_handler(commands=['about'])
-async def send_welcome(msg: types.Message):
-    await msg.answer(f"Author: Полуэктов Яков 3530904/10005\n"
+async def send_welcome(message: types.Message):
+    await message.answer(f"Author: Полуэктов Яков 3530904/10005\n"
                      f"Source: https://github.com/S-4I5/addtextoimage_tg_bot\n")
 
 
 @dp.throttled(anti_flood, rate=1)
 @dp.message_handler(commands=['tags'])
-async def get_tags(msg: types.Message):
-    await msg.answer(f"Список тегов:"
+async def get_tags(message: types.Message):
+    await message.answer(f"Список тегов:"
                      f"text - текст, который будет изображён (DEFAULT: Place for your textXD)\n"
                      f"fontsize - размер шрифта (DEFAULT: 20)\n"
                      f"fontcolor - цвета шрифта (DEFAULT: white)\n"
@@ -90,7 +90,7 @@ async def echo(message: Message):
     ])
 
     if not os.path.exists(output_image):
-        await bot.send_message("Произошла ошибка при генерации изображения: "
+        await message.answer("Произошла ошибка при генерации изображения: "
                                "попробуйте перепроверить правильность написания тегов")
 
     with open(output_image, "rb") as photo:
@@ -104,8 +104,8 @@ async def main():
     await dp.start_polling(bot)
 
 
-async def get_random_file_name(length):
-    letters = string.digits + string.ascii_letters
+def get_random_file_name(length):
+    letters = string.digits
     return ''.join(random.choice(letters) for i in range(length))
 
 
